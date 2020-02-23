@@ -2,9 +2,9 @@ package Algorithms1;
 import java.util.Scanner;
 public class bubblesort 
 {
-
-			public static void main(String[] args) {
-			    int i,j,count=0;
+	int i,j,count=0;
+			void bubble_sort() {
+			    
 			    System.out.print("Enter the number of elements in the array:");
 			    Scanner input=new Scanner(System.in);
 			    int n=input.nextInt();
@@ -44,4 +44,8 @@ public class bubblesort
 			        System.out.print(array[i]+"\t");    
 			    }
 			}
+		public static void main(String[] args) {
+			bubblesort obj=new bubblesort();
+			obj.bubble_sort();
 		}
+}
