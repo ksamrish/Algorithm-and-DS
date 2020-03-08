@@ -54,4 +54,8 @@ public class selection_sort {
 /* Time complexity:
 	O(n*(n-1)/2)
 	where n is number of elements in an array
+
+   Space complexity:
+   	O(1)
+	because we didnt use another array, but constants like i,j,k,min,flag.  so O(constant) which is O(1).
 */
