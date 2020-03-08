@@ -26,6 +26,7 @@ public class bubble_sort_mid {
 			array[i]=arrayInput;
 		}
 		bsortmid.bubblesortmid(array);
+		System.out.println("Array after sorting n/2 elements : ");
 		for(i=0;i<n;i++) {
 			System.out.print(array[i]+" ");
 		}
