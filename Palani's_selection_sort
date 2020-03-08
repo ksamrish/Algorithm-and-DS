@@ -1,0 +1,56 @@
+package Algorithms1;
+
+import java.util.Scanner;
+
+public class selection_sort {
+
+	public int[] selectionsort(int[] array,int n) {
+		
+	    for(int i=0;i<n-1;i++) {			// this loop works n-1 times as all the elements have been compared.
+	    	for(int j=i+1;j<n;j++) {			// this loop works n-i times as all the elements compared with above i th element.
+	    		if(array[i]>array[j]) {
+	    			int temp=array[i];
+	    			array[i]=array[j];
+	    			array[j]=temp;
+	    		}
+	    	}
+	    }
+	    System.out.println("\nSorted array:");
+	    
+	    return array;
+	}
+
+	public static void main(String[] args) {
+		int i,j;
+		System.out.print("Enter the number of elements in the array:");
+	    Scanner input=new Scanner(System.in);
+	    int n=input.nextInt();
+	    int[] array=new int[n];
+	    System.out.println("Enter the array elements to be sorted:");
+	    for(i=0;i<n;i++)
+	    {
+	       int arrayinput=input.nextInt();
+	       array[i]=arrayinput;
+	    }
+	    System.out.println("\nArray before sorting:");
+	    for(i=0;i<n;i++)
+	    {
+	        System.out.print(array[i]+"\t");
+	    }
+		selection_sort obj=new selection_sort();
+		obj.selectionsort(array,n);
+		for(i=0;i<n;i++)
+	    {
+	        System.out.print(array[i]+"\t");    
+	    }
+	}
+
+}
+
+/*
+Time complexity:
+	O(n^2)  because it will handle n elements with the next following elements, so worst case of n^2.
+	
+Space complexity:
+	O(constant) as there is no array or some other spaces handled, but some constants so O(constants) which is O(1).
+*/
