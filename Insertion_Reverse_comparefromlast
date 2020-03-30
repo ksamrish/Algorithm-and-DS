@@ -1,0 +1,56 @@
+import java.util.Scanner;
+public class InsertionPalaniAnnaReverse {
+
+	
+	public int[] insertionPalaniAnnaReverse(int[] array,int n) {
+		int current,slidingvalue,nsv,i,j;
+		for(i=n-2;i>=0;i--) {					
+			current = array[i];
+			j=n-1;
+			while(array[j]>current&&j>i) { 		
+				j--;
+			}
+			slidingvalue = array[j];
+			array[j] = current;
+			j--;
+			while(j>=i) {					
+				nsv = array[j];
+				array[j] = slidingvalue;
+				slidingvalue = nsv;
+				j--;
+			}
+		}
+		return array;
+	}
+
+	public static void main(String[] args) {
+		int n,i,j,x;
+		int[] array = new int[100];
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter number of elements in the array:");
+		n = sc.nextInt();
+		System.out.print("Enter array elements:");
+		for(i=0;i<n;i++) {
+			x = sc.nextInt();
+			array[i] = x;
+		}
+		
+		System.out.println("\nBefore sorting:");
+		
+		for(i=0;i<n;i++) {
+			System.out.print(array[i]+" ");
+		}
+		System.out.print("\n");
+		
+		InsertionPalaniAnnaReverse obj = new InsertionPalaniAnnaReverse();
+		obj.insertionPalaniAnnaReverse(array, n);
+		
+		System.out.println("\nAfter sorting:");
+		
+		for(i=0;i<n;i++) {
+			System.out.print(array[i]+" ");
+		}
+	}
+
+}
+
