@@ -1,0 +1,63 @@
+import java.util.Scanner;
+public class InsertionPalaniAnna {
+
+	
+	public int[] insertionPalaniAnna(int[] array,int n) {
+		int current,slidingvalue,nsv,i,j;
+		for(i=1;i<n;i++) {					// It runs n-1 times
+			current = array[i];
+			j=0;
+			while(array[j]<current) { 		// It will run (n*n-1)/2 times as if array index j value is less than the current value, it will execute
+				j++;
+			}
+			slidingvalue = array[j];
+			array[j] = current;
+			j++;
+			while(j<=i) {					// It will run (n*n-1)/2 times as slides for worst case
+				nsv = array[j];
+				array[j] = slidingvalue;
+				slidingvalue = nsv;
+				j++;
+			}
+		}
+		return array;
+	}
+
+	public static void main(String[] args) {
+		int n,i,j,x;
+		int[] array = new int[100];
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter number of elements in the array:");
+		n = sc.nextInt();
+		System.out.print("Enter array elements:");
+		for(i=0;i<n;i++) {
+			x = sc.nextInt();
+			array[i] = x;
+		}
+		
+		System.out.println("\nBefore sorting:");
+		
+		for(i=0;i<n;i++) {
+			System.out.print(array[i]+" ");
+		}
+		System.out.print("\n");
+		
+		InsertionPalaniAnna obj = new InsertionPalaniAnna();
+		obj.insertionPalaniAnna(array, n);
+		
+		System.out.println("\nAfter sorting:");
+		
+		for(i=0;i<n;i++) {
+			System.out.print(array[i]+" ");
+		}
+	}
+
+}
+
+/*
+Time complexity:
+ 	so worst case of O(n^2) as explained above in which worst case is 2*(n*n-1)/2 => so n^2-n , eliminating constant and lower order , it will be O(n^2).
+	
+Space complexity:
+	O(constant) as there is no array or some other spaces handled, but some constant spaces, so O(constants) which is O(1).
+*/
