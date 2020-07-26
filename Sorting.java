@@ -1,3 +1,4 @@
+package Algo_Sort;
 import java.util.Scanner;
 public class Sorting {
 	
@@ -149,21 +150,105 @@ public class Sorting {
 		return arr;
 	}
 	
+	public static int[] shell(int[] arr, int n) {
+		for(int j=n/2;j>=1;j/=2) {
+			for(int i=j;i<n;i++) {
+				int h=i;
+				for(int k=i-j;k>=0;k-=j) {
+					if(arr[k]>arr[h]) {
+						int temp = arr[k];
+						arr[k] = arr[h];
+						arr[h] = temp;
+						h=k;
+					}
+					else {
+						break;
+					}
+				}
+			}
+		}
+		return arr;
+	}
+	
+	public static int[] countsort(int[] a) {
+		int minimum = a[0];
+		int maximum = a[0];
+		for(int i=0;i<a.length;i++) {
+			if(a[i]<minimum)
+				minimum = a[i];
+			if(a[i]>maximum)
+				maximum = a[i];
+		}
+		for(int i=0;i<a.length;i++) {
+			a[i]-=minimum;
+		}
+		int bucket[] = new int[maximum-minimum+1];
+		for(int i=0;i<a.length;i++) {
+			bucket[a[i]]++;
+		}
+		int index = 0;
+		for(int i=0;i<bucket.length;i++) {
+			if(bucket[i]==0) {
+				continue;
+			}
+			for(int j=0;j<bucket[i];j++) {
+				a[index++] = i+minimum;
+			}
+		}
+		return a;
+	}
+	
+	public static void radix(int[] arr, int div) {
+		int[] temp = new int[10];
+		int[] op = new int[arr.length];
+		for(int i=0;i<arr.length;i++) {
+			temp[(arr[i]/div)%10]++;
+		}
+		
+		temp[0] = temp[0]-1;
+		for(int i=1;i<10;i++) {
+			temp[i] += temp[i-1];
+		}
+		for(int i=arr.length-1;i>=0;i--) {
+			int tempo = arr[i];
+			int index = temp[(arr[i]/div)%10]--;
+			op[index] = tempo;
+		}
+		for(int i=0;i<arr.length;i++) {
+			arr[i] = op[i];
+		}
+	}
+	
+	public static int[] radixsort(int[] arr) {
+		int maximum = 0;
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i]>maximum) {
+				maximum = arr[i];
+			}
+		}
+		int length = String.valueOf(maximum).length();
+		for(int i=0,div=1;i<length;i++,div*=10) {
+			radix(arr,div);
+		}
+		return arr;
+	}
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = 6;
 		int[] arr = new int[] {168,179,181,120,142,204};
 
+		Sorting sort = new Sorting();
 		System.out.println("Before sorting:");
 		for(int i=0;i<n;i++) 
 			System.out.print(arr[i]+" ");
 		
-		bubble(arr,n);
+		sort.bubble(arr,n);
 		System.out.println("\n\nBubble sort:");
 		for(int i=0;i<n;i++) 
 			System.out.print(arr[i]+" ");
 	
-		selection(arr,n);
+		sort.selection(arr,n);
 		System.out.println("\n\nSelection sort:");
 		for(int i=0;i<n;i++) 
 			System.out.print(arr[i]+" ");
@@ -192,5 +277,21 @@ public class Sorting {
 		System.out.println("\n\nHeap sort:");
 		for(int i=0;i<n;i++) 
 			System.out.print(arr[i]+" ");
+		
+		shell(arr,n);
+		System.out.println("\n\nShell sort:");
+		for(int i=0;i<n;i++) 
+			System.out.print(arr[i]+" ");
+		
+		countsort(arr);
+		System.out.println("\n\nCount sort:");
+		for(int i=0;i<n;i++) 
+			System.out.print(arr[i]+" ");
+		
+		radixsort(arr);
+		System.out.println("\n\nRadix sort:");
+		for(int i=0;i<n;i++) 
+			System.out.print(arr[i]+" ");
 	}
 }
+
